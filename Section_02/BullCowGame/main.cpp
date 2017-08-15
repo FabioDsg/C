@@ -5,15 +5,20 @@ using namespace std;
 
 void printIntro();
 void PlayGame();
+bool AskToPlayAgain();
 string getGuess();
 
 //The entry point for our application
 int main()
 {
-	printIntro();
-	PlayGame();
-			
-	return 0;
+	bool bPlayAgain = false;
+	do{
+		printIntro();
+		PlayGame();
+		bPlayAgain = AskToPlayAgain();
+		}
+	while (bPlayAgain);
+		return 0;
 }
 
 void PlayGame()
@@ -27,6 +32,14 @@ void PlayGame()
 		cout << "Your guess was: " << Guess << endl;
 		cout << endl;
 	}
+}
+
+bool AskToPlayAgain()
+{
+	cout << "Do you want to play again (y/n)? ";
+	string Response = "";
+	getline(cin, Response);
+	return (Response[0] == 'y') || (Response[0] == 'Y');
 }
 
 
