@@ -3,30 +3,39 @@
 
 using namespace std;
 
+void printIntro();
+string getGuessAndPrintBack();
+
+//The entry point for our application
 int main()
 {
-	//Introduce the game
+	
+	printIntro();
+	getGuessAndPrintBack();
+		
+	cout << endl;
+	return 0;
+}
+
+//Introduce the game
+void printIntro() {
+
 	constexpr int WORLD_LENGTH = 9;
 
 	cout << "Welcome to Bulls and Cows, a fun word game.\n";
-	cout << "Can you guess the " << WORLD_LENGTH; 
+	cout << "Can you guess the " << WORLD_LENGTH;
 	cout << " letter isogram I'm thinking of?\n";
 	cout << endl;
+	return;
+}
 
-	//Get a guess from the player
+//Get a guess from the player
+string getGuessAndPrintBack() {
+
 	cout << "Enter your guess: ";
 	string Guess = "";
 	getline(cin, Guess);
-
-	//Repeat the guess back to them
-	cout << "Your guess was: " << Guess << std::endl;
-
-	// try get a guess from the player without "string Guess = "";" 
-	cout << "Enter your guess: ";
-	getline(cin, Guess);
-
-	//Repeat the guess back to them
-	cout << "Your guess was: " << Guess << std::endl;
-	cout << endl;
-	return 0;
+	//Print the guess back to them
+	cout << "Your guess was: " << Guess << endl;
+	return Guess;
 }
