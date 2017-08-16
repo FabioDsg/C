@@ -1,12 +1,14 @@
 #include<iostream>
 #include<String>
-
-using namespace std;
+#include "FBullCowGame.h"
 
 void printIntro();
 void PlayGame();
 bool AskToPlayAgain();
-string getGuess();
+std::string getGuess();
+
+//Instantiate a new game
+FBullCowGame BCGame;
 
 //The entry point for our application
 int main()
@@ -23,22 +25,23 @@ int main()
 
 void PlayGame()
 {
+	int MaxTries = BCGame.GetMaxTries();
+	
 	//Loop for the number of turns asking for guesses
-	constexpr int NUMBER_OF_TURNS = 5;
-	for (int i = 0; i < NUMBER_OF_TURNS; i++)
+	for (int i = 0; i < MaxTries; i++)
 	{
-		string Guess ="";
+		std::string Guess ="";
 		Guess = getGuess();
-		cout << "Your guess was: " << Guess << endl;
-		cout << endl;
+		std::cout << "Your guess was: " << Guess << std::endl;
+		std::cout << std::endl;
 	}
 }
 
 bool AskToPlayAgain()
 {
-	cout << "Do you want to play again (y/n)? ";
-	string Response = "";
-	getline(cin, Response);
+	std::cout << "Do you want to play again (y/n)? ";
+	std::string Response = "";
+	std::getline(std::cin, Response);
 	return (Response[0] == 'y') || (Response[0] == 'Y');
 }
 
@@ -47,19 +50,21 @@ bool AskToPlayAgain()
 	void printIntro() 
 	{
 		constexpr int WORLD_LENGTH = 9;
-		cout << "Welcome to Bulls and Cows, a fun word game.\n";
-		cout << "Can you guess the " << WORLD_LENGTH;
-		cout << " letter isogram I'm thinking of?\n";
-		cout << endl;
+		std::cout << "Welcome to Bulls and Cows, a fun word game.\n";
+		std::cout << "Can you guess the " << WORLD_LENGTH;
+		std::cout << " letter isogram I'm thinking of?\n";
+		std::cout << std::endl;
 		return;
 	}
 
 
-string getGuess() 
+std::string getGuess() 
 {
+	int CurrentTry = BCGame.CurrentTry();
+	
 		//Get a guess from the player
-		cout << "Enter your guess: ";
-		string Guess = "";
-		getline(cin, Guess);
+		std::cout << "Try " << CurrentTry << ". Enter your guess: ";
+		std::string Guess = "";
+		std::getline(std::cin, Guess);
 		return Guess;
 }
