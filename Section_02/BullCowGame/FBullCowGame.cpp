@@ -12,7 +12,7 @@ void FBullCowGame::reset()
 	constexpr int32 MAX_TRIES = 8;
 	MyMaxTries = MAX_TRIES;
 
-	const Fstring HIDDEN_WORD = "ant";
+	const Fstring HIDDEN_WORD = "planet";
 	MyHiddenWord = HIDDEN_WORD;
 
 	MyCurrentTry = 1;
@@ -30,15 +30,24 @@ int32 FBullCowGame::CurrentTry() const
 	return MyCurrentTry;
 }
 
+int32 FBullCowGame::GetHiddenWordLength() const
+{
+	return MyHiddenWord.length();
+}
+
+
+
 bool FBullCowGame::IsGameWon() const
 {
 	return false;
 }
 
-bool FBullCowGame::CheckGuessValidity(Fstring)
+bool FBullCowGame::CheckGuessValidity(Fstring) const
 {
 	return false;
 }
+
+
 
 // Receives a VALID guess, increments turn, and returns count
 FBullCowCount FBullCowGame::SubmitGuess(Fstring Guess)
@@ -51,6 +60,7 @@ FBullCowCount FBullCowGame::SubmitGuess(Fstring Guess)
 		
 	//Loop through all letter in the guess
 	int32 HiddenWordLength = MyHiddenWord.length();
+
 	for (int32 i = 0; i < HiddenWordLength; i++)
 	{
 		//compare letters against the hidden word

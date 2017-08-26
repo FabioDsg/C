@@ -19,8 +19,9 @@ public:
 	void reset(); //TODO make a more rich return value.
 	int32 GetMaxTries() const;
 	int32 CurrentTry() const;
+	int32 GetHiddenWordLength() const;
 	bool IsGameWon() const;
-	bool CheckGuessValidity(Fstring);// TODO make a more rich return value.
+	bool CheckGuessValidity(Fstring) const;// TODO make a more rich return value.
 	FBullCowCount SubmitGuess(Fstring);
 
 private:

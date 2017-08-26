@@ -68,9 +68,8 @@ bool AskToPlayAgain()
 	//Introduce the game
 	void printIntro() 
 	{
-		constexpr int WORLD_LENGTH = 9;
 		std::cout << "Welcome to Bulls and Cows, a fun word game.\n";
-		std::cout << "Can you guess the " << WORLD_LENGTH;
+		std::cout << "Can you guess the " << BCGame.GetHiddenWordLength();
 		std::cout << " letter isogram I'm thinking of?\n";
 		std::cout << std::endl;
 		return;
