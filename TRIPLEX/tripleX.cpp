@@ -1,15 +1,15 @@
 #include <iostream>
 
-void PrintIntroduction()
+void PrintIntroduction(int Difficulty)
 {
-    std::cout << "##### You are in a restricted area... #####\n";
-    std::cout << "##### Enter the correct code to proceed... #####\n\n";
+    std::cout << "\n\nYou are at the level " << Difficulty;
+    std::cout << "\n##### Restricted area...#####\n##### Enter the correct code to proceed... #####\n\n";
 }
 
-void PlayGame()
+bool PlayGame(int Difficulty)
 {
 
-PrintIntroduction();
+PrintIntroduction(Difficulty);
 
 const int CodeA = 4;
 const int CodeB = 3;
@@ -33,10 +33,12 @@ int GuessProduct =  GuessA * GuessB * GuessC;
 if (GuessSum == Codesum && GuessProduct == CodeProduct)
 {
     std::cout << "\n##### Accsess granted! #####";
+    return true;
 }
 else
 {
     std::cout << "\n##### Accsess denied! #####";
+    return false;
 }
 
     
@@ -45,7 +47,19 @@ else
 int main()
 {
 
-PlayGame();
+int LevelDifficulty = 1;
+
+while(true)
+    {
+        bool bLevelComplete = PlayGame(LevelDifficulty);
+        std::cin.clear(); // Clears any errors
+        std::cin.ignore(); // Discards the buffer
+
+        if (bLevelComplete) 
+        {
+        ++LevelDifficulty;
+        }
+    }
 
 return 0;
 }
