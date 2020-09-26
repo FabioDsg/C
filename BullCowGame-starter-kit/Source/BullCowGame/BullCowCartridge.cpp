@@ -4,16 +4,16 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
+    
+    SetupGame();
+
+    PrintLine(TEXT("The hiddenWord is: %s"), *HiddenWord); // Debug line
 
     // Welcoming the player
     PrintLine(TEXT("Welcome to game! Let's play!"));
-    PrintLine(TEXT("Guess the 4 letter word!")); // Magic Number Remove
-    PrintLine(TEXT("Press Enter to continue..."));
+    PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len()); // Magic Number Remove
+    PrintLine(TEXT("Type your guess and press enter to continue..."));
 
-    InitGame(); // Setting up game
-    
-
-    
 
     // Prompt player for guess
 }
@@ -30,6 +30,10 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     }
     else
     {
+        if (Input.Len() != HiddenWord.Len())
+        {
+            PrintLine(TEXT("The Hidden Word is %i characters long, try again!"), HiddenWord.Len());
+        }
         PrintLine(TEXT("You have lost!"));
     }
 
@@ -49,7 +53,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 
 }
 
-void UBullCowCartridge::InitGame()
+void UBullCowCartridge::SetupGame()
 {
     HiddenWord = TEXT("cake"); // Declaration moved into head file
     Lives = 4; // Set lives
