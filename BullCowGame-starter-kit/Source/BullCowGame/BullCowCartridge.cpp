@@ -3,12 +3,12 @@
 
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
-    Super::BeginPlay();
-    
-    SetupGame();
+	Super::BeginPlay();
 
-    PrintLine(TEXT("The hiddenWord is: %s"), *HiddenWord); // Debug line
-    
+	SetupGame();
+
+	PrintLine(TEXT("The hidden word is: %s"), *HiddenWord); // Debug line
+
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
@@ -16,14 +16,13 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 
 	if (bGameOver)
 	{
-
 		ClearScreen();
 		SetupGame();
+
 
 	}
 	else // Checking PlayerGuess
 	{
-
 		if (Input == HiddenWord)
 		{
 			PrintLine(TEXT("You have won!!!"));
@@ -31,50 +30,54 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 		}
 		else
 		{
+
+
 			if (Input.Len() != HiddenWord.Len())
 			{
 				PrintLine(TEXT("The Hidden Word is %i characters long. \nYou have lost!"), HiddenWord.Len());
 				EndGame();
 			}
-			
+
 		}
+
 
 	}
 
 
-    // Check if Isogram
+	// Check if Isogram
 
-    // Check Right number of characters
+	// Check Right number of characters
 
-    // Remove life
+	// Remove life
 
-    // Check if life is > 0
+	// Check if life is > 0
 
-    // If yes play again
+	// If yes play again
 
-    // Show lives left
+	// Show lives left
 
-    // Prompt to play again
+	// Prompt to play again
 
 }
 
 void UBullCowCartridge::SetupGame()
 {
 
-    // Welcoming the player
-    PrintLine(TEXT("Welcome to game! Let's play!"));
+	// Welcoming the player
+	PrintLine(TEXT("Welcome to game! Let's play!"));
 
-    HiddenWord = TEXT("cake"); // Declaration moved into head file
-    Lives = 4; // Set lives
-    bGameOver = false;
+	HiddenWord = TEXT("cake"); // Declaration moved into head file
+	Lives = 4; // Set lives
+	bGameOver = false;
 
-    PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len()); // Magic Number Remove
-    PrintLine(TEXT("Type your guess. \nPress enter to continue...")); // Prompt player for guess
+	PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len()); // Magic Number Remove
+	PrintLine(TEXT("Type your guess. \nPress enter to continue...")); // Prompt player for guess
 
-    
+
 }
 
 void UBullCowCartridge::EndGame()
 {
+	bGameOver = true;
 	PrintLine(TEXT("Press enter to play again."));
 }
