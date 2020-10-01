@@ -4,40 +4,40 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
-    
-    // Welcome the player
-    PrintLine(TEXT("Welcome to Bull Cown Game!"));
-    PrintLine(TEXT("Guess the 4 letter word! "));
-    PrintLine(TEXT("Press enter to continue..."));
- 
+
     SetupGame(); // Setting Up Game
 
-    // Prompt player to guess
-
+    PrintLine((TEXT("The HiddenWord is: %s "), *HiddenWord)); // Debug line
+    
 
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
 {
-    ClearScreen();
-
-    // Checking PlayerGuess
-
-    if (HiddenWord == Input)
+    
+    if (bGameOver)
     {
-        PrintLine(TEXT("You have won!"));
+        ClearScreen();
+        SetupGame();
     }
-    else
+    else // Checking PlayerGuess
     {
-        if (Input.Len() != HiddenWord.Len())
+        if (HiddenWord == Input)
         {
-            PrintLine(TEXT("The hidden word is 4 characters long, try again!"));
+            PrintLine(TEXT("You have won!"));
+            EndGame();
         }
-        
-        PrintLine(TEXT("You have lost!"));
+        else
+        {
+            if (Input.Len() != HiddenWord.Len())
+            {
+                PrintLine(TEXT("The hidden word is %i characters long, \nYou have lost!"), HiddenWord.Len());
+            }
 
-        
+        }
     }
+
+   
 
     // Check if is a Isogram
 
@@ -59,9 +59,20 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 
 void UBullCowCartridge::SetupGame()
 {
-    
+    // Welcome the player
+    PrintLine(TEXT("Welcome to Bull Cows Game!"));
+
     HiddenWord = TEXT("cake");
-
     Lives = 4; // Set lives
+    bGameOver = false;
 
+    PrintLine(TEXT("Guess the %i letter word! "), HiddenWord.Len());
+    PrintLine(TEXT("Type in your guess. \nPress enter to continue..."));  // Prompt player to guess
+
+}
+
+void UBullCowCartridge::EndGame()
+{
+    bGameOver = true;
+    PrintLine(TEXT("Press enter to play again..."));
 }
