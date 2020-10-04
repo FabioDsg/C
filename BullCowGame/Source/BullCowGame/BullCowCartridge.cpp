@@ -29,10 +29,21 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         }
         else
         {
-            if (Input.Len() != HiddenWord.Len())
+            --Lives;
+            PrintLine(TEXT("Lost a life!"));
+            if (Lives > 0)
             {
-                PrintLine(TEXT("The hidden word is %i characters long, \nYou have lost!"), HiddenWord.Len());
+                if (Input.Len() != HiddenWord.Len())
+                {
+                    PrintLine(TEXT("Sorry, try guess again! \nYou have %i lives remaining"), Lives);
+                }
+
             }
+            else
+            {
+                PrintLine(TEXT("You have no lives left!"));
+            }
+            
 
         }
     }
